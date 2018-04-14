@@ -16,3 +16,4 @@ print " altearcao local"
 
 print " que bobao"
 
+print "usando tags"
