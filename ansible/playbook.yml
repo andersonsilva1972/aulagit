@@ -1,0 +1,21 @@
+---
+- name: Garantindo configuracao
+  hosts: dev
+  tasks:
+    - name: garantind usuariop developer
+      user: 
+        name: developer 
+        state: present
+
+    - name: Instalando o Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Colocando hello world
+      shell: echo hello world > /var/www/html/index.html
+
+    - name: Restartando o apache
+      service:
+        name: apache2
+        state: restarted

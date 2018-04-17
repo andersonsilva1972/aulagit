@@ -1,0 +1,25 @@
+---
+ - name: Servidor LAMP
+   hosts: prod
+   tasks:
+   - name: Instalando pacotes do LAMP
+     apt: name={{item}} state=present
+     with_items:
+     - apache2
+     - php7.0
+     - libapache2-mod-php7.0
+
+   - name: habilitando modulo do php
+     shell: a2enmod php7.0
+
+   - name: Colocando index.php
+     copy:
+       src: files/index.php 
+       dest: /var/www/html/index.php
+     notify: restart apache
+
+   handlers:
+   - name: restart apache
+     service: 
+       name: apache2
+       state: restarted
